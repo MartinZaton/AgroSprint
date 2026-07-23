@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión - Nexo Agro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 max-w-md w-full">
+        <h2 class="text-2xl font-bold text-gray-900 text-center mb-6">Ingresar a NexoAgro</h2>
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+
+            <div class="text-sm text-gray-600 space-y-2">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 rounded-xl transition mt-4">
+                Iniciar Sesión
+            </button>
+        </form>
+
+        <p class="text-sm text-gray-500 text-center mt-4">
+            ¿No tenés cuenta? <a href="{% url 'registro_usuario' %}" class="text-emerald-600 hover:underline">Registrate acá</a>
+        </p>
+    </div>
+</body>
+</html>

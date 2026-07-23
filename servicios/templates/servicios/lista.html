@@ -1,0 +1,104 @@
+{% extends 'servicios/base.html' %}
+
+{% block title %}Inicio - Nexo Agro{% endblock %}
+
+{% block content %}
+    <header class="max-w-6xl mx-auto px-4 mt-10 text-center">
+        <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">Servicios Agropecuarios</h1>
+        <p class="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">Encontrá y contactá profesionales del campo en tu zona de forma directa y sin intermediarios.</p>
+    </header>
+
+
+    <section class="max-w-7xl mx-auto px-4 mt-8">
+        <form method="GET" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row items-end gap-4">
+
+
+            <div class="w-full md:w-1/4">
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Busco / Ofrezco</label>
+                <select name="tipo" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                    <option value="">Todos</option>
+                    {% for valor, nombre in tipos %}
+                        <option value="{{ valor }}" {% if tipo_seleccionado == valor %}selected{% endif %}>{{ nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <div class="w-full md:w-1/4">
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Categoría</label>
+                <select name="categoria" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                    <option value="">Todas</option>
+                    {% for codigo, nombre in categorias %}
+                        <option value="{{ codigo }}" {% if cat_seleccionada == codigo %}selected{% endif %}>{{ nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <div class="w-full md:w-1/4">
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Zona</label>
+                <select name="ubicacion" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+                    <option value="">Todas</option>
+                    {% for valor, nombre in zonas %}
+                        <option value="{{ valor }}" {% if ub_seleccionada == valor %}selected{% endif %}>{{ nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <div class="w-full md:w-1/4 flex gap-2">
+                <button type="submit" class="flex-1 bg-emerald-700 hover:bg-emerald-600 text-white text-sm font-semibold py-2 px-4 rounded-xl transition shadow-sm">
+                    🔍 Filtrar
+                </button>
+                {% if tipo_seleccionado or cat_seleccionada or ub_seleccionada %}
+                    <a href="{% url 'lista_servicios' %}" class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-semibold py-2 px-4 rounded-xl transition text-center">
+                        Limpiar
+                    </a>
+                {% endif %}
+            </div>
+        </form>
+    </section>
+
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        {% if servicios %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for servicio in servicios %}
+                    <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition duration-300 border border-gray-100 overflow-hidden flex flex-col justify-between">
+                        <div class="p-6">
+                            {% if servicio.tipo_oferta == 'PRESTADOR' %}
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">
+                                    ✅ Ofrece
+                                </span>
+                            {% else %}
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-bold bg-orange-100 text-orange-800">
+                                    🔍 Busca
+                                </span>
+                            {% endif %}
+                            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                                {{ servicio.get_categoria_display }}
+                            </span>
+                            <h2 class="text-xl font-bold text-gray-950 mt-3 mb-2">
+                                <a href="{% url 'detalle_servicio' servicio.id %}" class="hover:text-emerald-700 transition">
+                                    {{ servicio.titulo }}
+                                </a>
+                            </h2>
+                            <p class="text-gray-600 text-sm line-clamp-3 mb-4">{{ servicio.descripcion }}</p>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <span class="mr-1">📍</span> {{ servicio.ubicacion }}
+                            </div>
+                            <a href="https://wa.me/{{ servicio.contacto }}" target="_blank" class="inline-flex items-center text-sm font-semibold text-emerald-700 hover:text-emerald-600 transition">
+                                Contactar ➜
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-12 bg-white rounded-2xl border border-dashed border-gray-300">
+                <p class="text-gray-500 text-lg">No hay servicios disponibles en este momento.</p>
+            </div>
+        {% endif %}
+    </main>
+{% endblock %}
