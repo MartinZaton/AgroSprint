@@ -14,6 +14,7 @@
 
             <div class="flex items-center gap-6">
                 <a href="{% url 'crear_servicio' %}" class="text-sm font-medium hover:text-emerald-200 transition">+ Publicar Servicio</a>
+                <a href="{% url 'crear_evento' %}" class="text-sm font-medium hover:text-emerald-200 transition">+ Publicar Evento</a>
 
                 {% if user.is_authenticated %}
                     <div class="flex items-center gap-4">
