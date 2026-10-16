@@ -1,0 +1,100 @@
+{% extends 'servicios/base.html' %}
+
+{% block title %}AgroSprint | Conectamos el campo{% endblock %}
+
+{% block content %}
+<section class="bg-gradient-to-br from-emerald-900 via-emerald-800 to-green-700">
+    <div class="max-w-6xl mx-auto px-4 py-24 sm:py-32 text-center text-white">
+        <p class="text-sm uppercase tracking-[0.25em] text-emerald-200 font-semibold">AgroSprint</p>
+        <h1 class="mt-4 text-4xl sm:text-6xl font-extrabold tracking-tight">Conectamos las necesidades del campo</h1>
+        <p class="mt-6 max-w-3xl mx-auto text-lg sm:text-xl text-emerald-50">
+            Un espacio para que productores y profesionales agropecuarios encuentren servicios, publiquen lo que ofrecen o soliciten lo que necesitan.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+            {% if user.is_authenticated %}
+                <a href="{% url 'crear_servicio' %}" class="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-6 py-3 rounded-xl transition">
+                    Publicar un servicio
+                </a>
+            {% else %}
+                <a href="{% url 'registro_usuario' %}" class="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-6 py-3 rounded-xl transition">
+                    Crear cuenta gratis
+                </a>
+            {% endif %}
+            <a href="{% url 'lista_servicios' %}" class="bg-white/10 hover:bg-white/20 border border-white/50 text-white font-semibold px-6 py-3 rounded-xl transition">
+                Explorar servicios
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-4 py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900">¿Qué es AgroSprint?</h2>
+        <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            AgroSprint es una plataforma de encuentro para la comunidad agropecuaria. Reúne publicaciones de quienes ofrecen servicios y de quienes buscan soluciones para su actividad, con información de categoría, ubicación y contacto para facilitar la conexión directa.
+        </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <article class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm">
+            <div class="text-3xl" aria-hidden="true">🔎</div>
+            <h3 class="mt-4 text-xl font-bold text-gray-900">Encontrá lo que necesitás</h3>
+            <p class="mt-3 text-gray-600">Explorá las publicaciones y filtrá por tipo de oferta, categoría y zona para ubicar opciones relevantes.</p>
+        </article>
+        <article class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm">
+            <div class="text-3xl" aria-hidden="true">📣</div>
+            <h3 class="mt-4 text-xl font-bold text-gray-900">Publicá tu propuesta</h3>
+            <p class="mt-3 text-gray-600">Creá una cuenta, cargá los datos de tu servicio y agregá una descripción y un medio de contacto.</p>
+        </article>
+        <article class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm">
+            <div class="text-3xl" aria-hidden="true">🤝</div>
+            <h3 class="mt-4 text-xl font-bold text-gray-900">Contactá directamente</h3>
+            <p class="mt-3 text-gray-600">Revisá los detalles de cada publicación y usá el contacto indicado para conversar con quien la publicó.</p>
+        </article>
+    </div>
+    {% if not user.is_authenticated %}
+    <div class="mt-10 text-center">
+        <p class="text-gray-700">¿Querés publicar un servicio o contactar a otros usuarios?</p>
+        <a href="{% url 'registro_usuario' %}" class="inline-flex mt-4 bg-emerald-700 hover:bg-emerald-600 text-white font-semibold px-6 py-3 rounded-xl transition">
+            Registrarme y empezar
+        </a>
+    </div>
+    {% endif %}
+</section>
+
+<section class="bg-emerald-50 border-y border-emerald-100">
+    <div class="max-w-6xl mx-auto px-4 py-16 sm:py-20">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold text-gray-900">¿Cómo se usa?</h2>
+            <p class="mt-3 text-gray-600">Empezá en pocos pasos, tanto si buscás como si ofrecés.</p>
+        </div>
+        <ol class="mt-10 grid gap-8 md:grid-cols-4">
+            <li class="bg-white p-6 rounded-2xl shadow-sm">
+                <span class="text-sm font-bold text-emerald-700">PASO 1</span>
+                <h3 class="mt-2 font-bold text-gray-900">Registrate</h3>
+                <p class="mt-2 text-sm text-gray-600">Creá tu cuenta para publicar servicios.</p>
+            </li>
+            <li class="bg-white p-6 rounded-2xl shadow-sm">
+                <span class="text-sm font-bold text-emerald-700">PASO 2</span>
+                <h3 class="mt-2 font-bold text-gray-900">Explorá o publicá</h3>
+                <p class="mt-2 text-sm text-gray-600">Buscá una solución o publicá lo que ofrecés o necesitás.</p>
+            </li>
+            <li class="bg-white p-6 rounded-2xl shadow-sm">
+                <span class="text-sm font-bold text-emerald-700">PASO 3</span>
+                <h3 class="mt-2 font-bold text-gray-900">Filtrá y compará</h3>
+                <p class="mt-2 text-sm text-gray-600">Usá la categoría y la zona para encontrar publicaciones de interés.</p>
+            </li>
+            <li class="bg-white p-6 rounded-2xl shadow-sm">
+                <span class="text-sm font-bold text-emerald-700">PASO 4</span>
+                <h3 class="mt-2 font-bold text-gray-900">Contactá</h3>
+                <p class="mt-2 text-sm text-gray-600">Abrí una publicación y escribile a la persona por el medio indicado.</p>
+            </li>
+        </ol>
+        <div class="mt-10 text-center">
+            <a href="{% url 'lista_servicios' %}" class="inline-flex bg-emerald-700 hover:bg-emerald-600 text-white font-semibold px-6 py-3 rounded-xl transition">
+                Empezar a explorar
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

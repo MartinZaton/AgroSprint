@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Iniciar Sesión - Nexo Agro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 max-w-md w-full">
-        <h2 class="text-2xl font-bold text-gray-900 text-center mb-6">Ingresar a NexoAgro</h2>
+{% extends 'servicios/base.html' %}
+
+{% block title %}Iniciar Sesión - AgroSprint{% endblock %}
+
+{% block content %}
+    <main class="flex justify-center px-4 py-16">
+    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 max-w-md w-full h-fit">
+        <h2 class="text-2xl font-bold text-gray-900 text-center mb-6">Ingresar a AgroSprint</h2>
 
         <form method="POST" class="space-y-4">
             {% csrf_token %}
@@ -25,5 +23,5 @@
             ¿No tenés cuenta? <a href="{% url 'registro_usuario' %}" class="text-emerald-600 hover:underline">Registrate acá</a>
         </p>
     </div>
-</body>
-</html>
+    </main>
+{% endblock %}

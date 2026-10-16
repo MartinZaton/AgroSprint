@@ -14,6 +14,7 @@ class ServicioAgro(models.Model):
         GANADERIA = 'GANADERIA', 'Ganadería'
         ASESORIA = 'ASESORIA', 'Asesoría'
         INSUMOS = 'INSUMOS', 'Insumos'
+        TRANSPORTE = 'TRANSPORTE', 'Transporte'
         OTROS = 'OTROS', 'Otros'
 
     class Ubicacion(models.TextChoices):

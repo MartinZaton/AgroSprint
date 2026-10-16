@@ -1,10 +1,13 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import EventoForm, ServicioForm
+from .forms import EventoForm, RegistroUsuarioForm, ServicioForm
 from .models import ServicioAgro
+
+
+def inicio(request):
+    return render(request, 'servicios/inicio.html')
 
 
 def lista_servicios(request):
@@ -66,7 +69,7 @@ def crear_evento(request):
 
 
 def registro_usuario(request):
-    form = UserCreationForm(request.POST or None)
+    form = RegistroUsuarioForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         user = form.save()
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Nexo Agro{% endblock %}</title>
+    <title>{% block title %}AgroSprint{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
+<body class="bg-cover bg-center bg-fixed text-gray-800 font-sans flex flex-col min-h-screen" style="background-image: linear-gradient(rgba(249, 250, 251, 0.45), rgba(249, 250, 251, 0.55)), url('{% static 'servicios/agrosprint-background.jpg' %}');">
 
     <nav class="bg-emerald-700 text-white shadow-md">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="{% url 'lista_servicios' %}" class="text-2xl font-bold tracking-tight">🌾 Nexo<span class="text-emerald-300">Agro</span></a>
+            <a href="{% url 'inicio' %}" class="text-2xl font-bold tracking-tight">🌾 Agro<span class="text-emerald-300">Sprint</span></a>
 
             <div class="flex items-center gap-6">
+                <a href="{% url 'lista_servicios' %}" class="text-sm font-medium hover:text-emerald-200 transition">Explorar servicios</a>
                 <a href="{% url 'crear_servicio' %}" class="text-sm font-medium hover:text-emerald-200 transition">+ Publicar Servicio</a>
                 <a href="{% url 'crear_evento' %}" class="text-sm font-medium hover:text-emerald-200 transition">+ Publicar Evento</a>
 
@@ -46,7 +48,7 @@
     <footer class="bg-gray-900 text-gray-400 py-8 border-t border-gray-800 mt-16">
         <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-                <p class="text-white font-bold text-lg tracking-wide">🌾 NexoAgro</p>
+                <p class="text-white font-bold text-lg tracking-wide">🌾 AgroSprint</p>
                 <p class="text-xs mt-1 text-gray-500">Conectando productores y profesionales del campo de forma directa.</p>
             </div>
 
@@ -60,7 +62,7 @@
         </div>
 
         <div class="max-w-6xl mx-auto px-4 mt-6 pt-6 border-t border-gray-800 text-[11px] text-center text-gray-600">
-            © 2026 NexoAgro. Proyecto de Ingeniería Agro-Tecnológica. Todos los derechos reservados.
+            © 2026 AgroSprint. Proyecto de Ingeniería Agro-Tecnológica. Todos los derechos reservados.
         </div>
     </footer>
 

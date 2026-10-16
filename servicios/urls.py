@@ -3,7 +3,8 @@ from django.contrib.auth import views as auth_views  # ← Importamos las vistas
 from . import views
 
 urlpatterns = [
-    path('', views.lista_servicios, name='lista_servicios'),
+    path('', views.inicio, name='inicio'),
+    path('servicios/', views.lista_servicios, name='lista_servicios'),
     path('servicio/<int:pk>/', views.detalle_servicio, name='detalle_servicio'),
     path('servicio/nuevo/', views.crear_servicio, name='crear_servicio'),
     path('evento/nuevo/', views.crear_evento, name='crear_evento'),

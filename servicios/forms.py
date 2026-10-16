@@ -1,5 +1,44 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from .models import EventoAgro, ServicioAgro
+
+
+class RegistroUsuarioForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        fields = ('username',)
+        labels = {
+            'username': 'Nombre de usuario',
+        }
+        help_texts = {
+            'username': 'Hasta 150 caracteres. Puede incluir letras, números y @/./+/-/_.',
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500',
+                'placeholder': 'Elegí un nombre de usuario',
+                'autocomplete': 'username',
+                'autofocus': True,
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].label = 'Contraseña'
+        self.fields['password1'].help_text = (
+            'Usá al menos 8 caracteres y evitá contraseñas comunes o fáciles de adivinar.'
+        )
+        self.fields['password1'].widget.attrs.update({
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500',
+            'placeholder': 'Creá una contraseña segura',
+            'autocomplete': 'new-password',
+        })
+        self.fields['password2'].label = 'Confirmar contraseña'
+        self.fields['password2'].help_text = 'Ingresá la misma contraseña nuevamente para confirmarla.'
+        self.fields['password2'].widget.attrs.update({
+            'class': 'w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500',
+            'placeholder': 'Repetí tu contraseña',
+            'autocomplete': 'new-password',
+        })
 
 
 class EventoForm(forms.ModelForm):
